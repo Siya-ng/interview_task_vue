@@ -2,7 +2,6 @@
   <div class="uploadFile">
     <div>
       <img src="../assets/infographic.gif" class="gifImage">
-
     </div>
     <form enctype="multipart/form-data">
         <h1>Upload CSV file</h1>
@@ -22,8 +21,9 @@
         <div class="fileList">
           <h2 v-if="uploadedFiles.length> 0">Uploaded File</h2>
           <ol>
-            <li v-for="(files, index) in uploadedFiles" v-bind:key="{index}">
+            <li class="row" v-for="(files, index) in uploadedFiles" v-bind:key="{index}">
               <h4>{{files.name}}</h4>
+              <button class="removeBtn" v-on:click="removeFile">X</button>
             </li>
           </ol>
         </div>
@@ -58,10 +58,13 @@ export default {
       if (!fileList.length) return;
       for (let i = fileList.length - 1; i >= 0; i--) {
         this.uploadedFiles.push(fileList[i]);
-        this.save(fileList[i]);
+        // this.save(fileList[i]);
       }
       document.getElementById('csvFiles').value = [];
     },
+    removeFile: function (index) {
+      this.uploadedFiles.splice(index, 1);
+    }
   },
 };
 </script>
@@ -89,5 +92,14 @@ a {
 .gifImage {
   height: 400px;
   width: 400px;
+}
+.removeBtn {
+  height: 100%;
+  align-self: center;
+}
+.row {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
 }
 </style>
