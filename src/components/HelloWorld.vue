@@ -9,6 +9,7 @@
           target="_blank"
         >
           Core Docs
+          Test
         </a>
       </li>
       <li>
